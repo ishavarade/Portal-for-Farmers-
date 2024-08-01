@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Details</title>
+    <link rel="stylesheet" type="text/css" href="style2.css">
+</head>
+<style>
+    /* style2.css */
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+.header {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Form styles */
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button styles */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #0b5db3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #024990;
+}
+
+</style>
+<body>
+    <div align="center">
+        <div align="center" class="border">
+            <div class="header">
+                <h1 class="word" style="color: rgb(245, 246, 245);">Farmer Details</h1>
+            </div><br>
+            <h2 class="word">
+                <form action="/frfid" method="post">
+                    <body>
+                        <p>Farmer ID: {{ farmer.fid }}</p>
+                        <p>Username: {{ farmer.username }}</p>
+                        <p>Email: {{ farmer.email }}</p>
+                        <!-- Add more details as needed -->
+                    </body>
+                    <!-- Dynamic Farmer Details Section
+                    <div class="details">
+                        <label for="farmerID">Farmer ID:</label>
+                        <span>{{ farmer.fid }}</span>
+                    </div>
+                    <div class="details">
+                        <label for="username">Username:</label>
+                        <span>{{ farmer.username }}</span>
+                    </div>
+                    <div class="email">
+                        <label for="email">Email:</label>
+                        <span>{{ farmer.email }}</span>
+                    </div> -->
+                    <!-- Static Role Section -->
+                    <!-- <label for="role">Select Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="Farmer">Farmer</option>
+                    </select><br><br> -->
+
+                    <!-- Dynamic Farmer ID Section -->
+                    <!-- <div id="farmer-id" style="display: none;">
+                        <input type="text" id="farmerID" name="farmerID" placeholder="Enter Farmer ID" class="textbox"><br><br>
+                    </div> -->
+
+                    <div class="button-container">
+                        <a href="/{{farmer.fid}}/products" class="button products">Products</a>
+                        <a href="/{{farmer.fid}}/earning" class="button earning">Earning</a>
+                    </div>
+
+                    <!-- Static Submit Button -->
+                    <!-- <input type="submit" class="btn" value="Sign Up"><br> -->
+                </form>
+            </h2>
+            <!-- <p class="bottom">Already have an account? <a class="bottom" href="/login">Sign In here</a></p> -->
+        </div>
+    </div>
+</body>
+</html>

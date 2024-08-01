@@ -1,0 +1,78 @@
+{% extends 'Details_base.html' %}
+{% block body %}
+
+<div class="container">
+    <h1>Sign up</h1>
+    <form id="signupForm" method="post" action="/signin.html" onsubmit="">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <!-- <label for="role">Select Role:</label>
+        <select id="role" name="role" required>
+            <option value="" disabled selected>Select Role</option>
+            <option value="buyer">Buyer</option>
+            <option value="seller">Seller</option>
+        </select> -->
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="name">Phone Number:</label>
+        <input type="text" id="phone" name="phone" placeholder="+91XXXXXXXXXX" pattern="\+91\d{10}" required>
+
+        <label for="name">Farmer Id:</label>
+        <input type="text" id="farmer_id" name="farmer_id" placeholder="ajay#123" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" placeholder="Enter your address" required>
+
+        <button type="submit" value="Signup">Signup</button>
+    </form>
+
+    <p>Already have an account? <a href="file:///C:/Users/dell/Desktop/app/loginfarmer.html">Login</a></p>
+
+</div>
+<div class="container" my-3>
+
+    {% if Sign|length==0 %}
+
+        no record
+      {% else %}
+       <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">SNo</th>
+                <th scope="col">Email</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Farmer_id</th>
+                <th scope="col">Address</th>
+                <th scope="col">Time</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for view in sign %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{view.email}}</td>
+                <td>{{view.name}}</td>
+                <td>{{view.phone}}</td>
+                <td>{{view.farmer_id}}</td>
+                <td>{{view.address}}</td>
+                <td>{{view.date_created}}</td>
+                <td>
+                    <a href="/NUpdate/{{view.sno}}" type="button" class="btn btn-dark btn-sm mx-1">Update</button>
+                        <a href="/NDelete/{{view.sno}}" type="button" class="btn btn-dark btn-sm mx-1">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+    {% endif %}
+
+
+</div>
+
+{% endblock body %}

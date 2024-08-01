@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: rgba(135, 247, 118, 0.259);
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    .terms {
+      margin-bottom: 20px;
+    }
+    .terms p {
+      line-height: 1.5;
+    }
+    .buttons {
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    .btn.decline {
+      background-color: #eb1800;
+      color: #fff;
+    }
+    .btn.accept {
+      background-color: #51ca2c;
+      color: #fff;
+    }
+    .btn:hover {
+      background-color: #354bdd;
+    }
+    .terms h2 span {
+      color: #219f23;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Terms of Service</h1>
+    <div class="terms">
+      <h2><span>Portal for Farmer's</span></h2>
+      <p>The website The portal for Farmer's provides a platform for farmers to sell their products online.</p>
+      <h2>Fee Structure</h2>
+      <p>By using the Platform, farmers agree to pay a fee of 5% of their earnings from transactions made through the Platform as profit to the website.</p>
+      <h2>Payment Terms</h2>
+      <p>The 5% fee will be deducted automatically from farmers' earnings at the time of each transaction. Payment of fees will be processed through the payment method selected by the farmer during registration.</p>
+      <p>By using the Platform, users agree to adhere to these terms and conditions regarding the 5% fee on their earnings as profit to the website. For inquiries or assistance, please contact us at [Your Contact Information].</p>
+      <!-- Add more terms and conditions here -->
+    </div>
+    <div class="buttons">
+      <a class="btn decline" href="{{url_for('passd')}}">Decline</button>
+      <a class="btn accept" href="{{ url_for('index') }}">Accept</a>
+      <a href="{{ url_for('term') }}">Go to Term</a>
+
+    </div>
+  </div>
+</body>
+</html>

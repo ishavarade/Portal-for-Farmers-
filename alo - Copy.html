@@ -1,0 +1,37 @@
+<!-- Store this code in 'login.html' file inside the 'templates' folder-->
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Login </title>
+		<link rel="stylesheet" href="C:\Users\dell\Desktop\app\style.css">		 
+	</head>
+	<body>
+		<div align="center">
+		<div align="center" class="border">
+			<div class="header">
+				<h1 class="word" style="color: green;">Login</h1>
+			</div>
+			<h2 class="word">
+				<form action="{{ url_for('login') }}" method="post">
+					
+				<div class="msg" style="color: black; text-align: start; font-size: 20px;font-weight: normal;">Email:</div>
+				
+				<input id="username" name="username" type="username" placeholder="Enter Your username" class="textbox"  required/></br>
+			
+				<div class="msg" style="color: black; text-align:start; font-size: 20px;font-weight: normal;">Password:</div>
+				
+					<input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox" required/></br>
+					<input type="submit" class="btn" value="Sign In"></br>
+				</form>
+			</h2>
+			<p class="bottom">Don't have an account? <a class="bottom" href="{{url_for('register')}}"> Sign Up here</a></p>
+		</div>
+		</div>
+		<!-- <a href="C:\Users\dell\Desktop\app\style.css"></a>-->
+	</body> 
+</html> 
+
+
+
+

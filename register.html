@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+     <meta charset="UTF-8">
+     <title>Register</title>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+     <script>
+         function showHideFarmerID() {
+             var role = document.getElementById('role').value;
+             var farmerIDTextBox = document.getElementById('farmer-id');
+ 
+             if (role === 'Farmer') {
+                 farmerIDTextBox.style.display = 'block';
+             } else {
+                 farmerIDTextBox.style.display = 'none';
+             }
+         }
+     </script>
+ </head>
+ <body><br><br>
+ 
+ <div align="center">
+     <div align="center" class="border">
+         <div class="header">
+             <h1 class="word">Register</h1>
+         </div><br><br><br>
+         <h2 class="word">
+             <form action="/register" method="POST">
+                 <div class="msg">{{ msg }}</div>
+                
+                 <label for="email" >Username:</label>
+                 <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"><br><br>
+                 <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"><br><br>
+                 <input id="email" name="email" type="text" placeholder="Enter Your Email ID" class="textbox"><br><br>
+ 
+                 <label for="Role" class="label-color">Select Role:</label>
+                 <select id="Role" name="Role" required>
+                     <option value="" disabled selected>Select Role</option>
+                     <!-- <option value="Buyer">Buyer</option> -->
+                     <option value="Farmer">Farmer</option>
+                 </select><br><br>
+ 
+                 <!-- <div id="farmer-id" style="display: none;">
+                     <input type="text" id="farmerID" name="farmerID" placeholder="Enter Farmer ID" class="textbox" value="{{farmer_id}}"><br><br>
+                 </div>
+  -->
+ 
+               <div id="farmer-id-popup" class="alert alert-success" style="display:none;">
+                Farmer ID: <span id="farmer-id"></span>
+            </div>
+ 
+ 
+ 
+                 <input type="submit" class="btn" value="Sign Up" onclick="showHideFarmerID()"><br>
+             </form>
+         </h2>
+         <p class="bottom">Already have an account? <a class="bottom" href="/login">Sign In here</a></p>
+     </div>
+ </div>
+ <script>
+    // Get the farmer ID from the session
+    var farmerId = '{{ session.get("farmer_id") }}';
+ 
+    // Display the pop-up message with the farmer ID
+    if (farmerId) {
+        document.getElementById("farmer-id-popup").style.display = "block";
+        document.getElementById("farmer-id").innerText = farmerId;
+        session.pop("farmer_id", None);
+    }
+ </script>
+ </body>
+ </html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function showHideFarmerID() {
+            var role = document.getElementById('role').value;
+            var farmerIDTextBox = document.getElementById('farmer-id');
+
+            if (role === 'Farmer') {
+                farmerIDTextBox.style.display = 'block';
+            } else {
+                farmerIDTextBox.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body><br><br>
+
+<div align="center">
+    <div align="center" class="border">
+        <div class="header">
+            <h1 class="word">Register</h1>
+        </div><br><br><br>
+        <h2 class="word">
+            <form action="/register" method="POST">
+                <div class="msg">{{ msg }}</div>
+
+                <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"><br><br>
+                <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"><br><br>
+                <input id="email" name="email" type="text" placeholder="Enter Your Email ID" class="textbox"><br><br>
+
+                <label for="Role" class="label-color">Select Role:</label>
+                <select id="Role" name="Role" required onchange="showHideFarmerID()">
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="Buyer">Buyer</option>
+                    <option value="Farmer">Farmer</option>
+                </select><br><br>
+
+                <div id="farmer-id" style="display: none;">
+                    <input type="text" id="farmerID" name="farmerID" placeholder="Enter Farmer ID" class="textbox" value="{{farmer_id}}"><br><br>
+                </div>
+
+                <input type="submit" class="btn" value="Sign Up"><br>
+            </form>
+        </h2>
+        <p class="bottom">Already have an account? <a class="bottom" href="/login">Sign In here</a></p>
+    </div>
+</div>
+</body>
+</html> -->

@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Filter And Search</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    
+    <style>
+      * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: "Poppins", sans-serif;
+  }
+
+
+  #search-input {
+        color: black; /* Set the text color to black */
+    }
+
+  body {
+    background-color: #d8f1dc;
+  }
+  .wrapper {
+    width: 95%;
+    margin: 0 auto;
+  }
+  #search-container {
+    margin: 1em 0;
+  }
+  #search-container input {
+    background-color: transparent;
+    width: 40%;
+    border-bottom: 2px solid #110f29;
+    padding: 1em 0.3em;
+  }
+  #search-container input:focus {
+    border-bottom-color: #0c3809;
+  }
+  #search-container button {
+    padding: 1em 2em;
+    margin-left: 1em;
+    background-color: green;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-top: 0.5em;
+  }
+  .button-value {
+    border: 2px solid #182615;
+    padding: 1em 2.2em;
+    border-radius: 3em;
+    background-color: transparent;
+    color: #1f4d29;
+    cursor: pointer;
+  }
+
+  .active {
+    background-color: #1f4d29;
+    color: #ffffff;
+  }
+  #products {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 1.5em;
+    padding: 2em 0;
+  }
+  .card {
+    background-color: #ffffff;
+    max-width: 18em;
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 1em 2em 2.5em rgba(1, 2, 68, 0.08);
+  }
+  .image-container {
+    text-align: center;
+  }
+  img {
+    max-width: 100%;
+    object-fit: contain;
+    height: 15em;
+  }
+  .container {
+    padding-top: 1em;
+    color: #110f29;
+  }
+  .container h5 {
+    font-weight: 500;
+  }
+  .hide {
+    display: none;
+  }
+  @media screen and (max-width: 720px) {
+    img {
+      max-width: 100%;
+      object-fit: contain;
+      height: 10em;
+    }
+    .card {
+      max-width: 10em;
+      margin-top: 1em;
+    }
+    #products {
+      grid-template-columns: auto auto;
+      grid-column-gap: 1em;
+    }
+  }
+
+
+
+  /* Existing styles */
+
+/* Add to Cart button */
+.add-to-cart-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 0.5em;
+}
+
+/* Buy Now button */
+.buy-now-btn {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#search-input{
+  color: black;
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 720px) {
+  /* Adjustments for smaller screens */
+  .add-to-cart-btn,
+  .buy-now-btn {
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+  }
+}
+
+
+
+
+
+    </style>
+
+</head>
+<body>
+
+    
+
+
+    <div class="wrapper">
+        <div id="search-container">
+            <input type="search" id="search-input" placeholder ="Search product name here.." >
+            <button id="search">Search</button>
+        </div>
+        <div id="buttons">
+            <button class="button-value" onclick="filterProduct('all')">All</button>
+            <button class="button-value" onclick="filterProduct('fruit')">Fruit</button>
+            <button class="button-value" onclick="filterProduct('dairy')">Dairy</button>
+            <button class="button-value" onclick="filterProduct('vegetable')">Vegetable</button>
+            <button class="button-value" onclick="filterProduct('spices')">Spices</button>
+        </div>
+        <div class="wrapper" id="products">
+            {% for todo in alltodo %}
+            <div class="card {{ todo.category | lower }}">
+
+                <div class="image-container">
+                    <img src="{{ todo.image }}" alt="{{ todo.product_name }}" class="product-image">
+                    <form action="/upload" method="post" enctype="multipart/form-data"></form>
+
+                </div>
+               
+
+                <!-- add image -->
+                <div class="container">
+                <div id="upload-container">
+                  <label for="product-image">Upload Image:</label>
+                  <!-- Change type to text for URL input -->
+                <!-- <input type="text" id="product-image-url" name="product-image-url" placeholder="Enter image URL"> -->
+        <!-- Remove accept attribute to allow any file type -->
+               <input type="file" id="product-image" name="product-image" style="display: none;">
+        <!-- Add a button to trigger file input click -->
+               <button id="choose-file">Choose File</button>
+                        
+              </div>
+            </div>
+              
+                <div class="container">
+                    <h5>{{ todo.product_name }}</h5>
+                    <p>Price: {{ todo.price }}</p>
+                    <p>Available Quantity: {{ todo.quantity }}</p>
+                    <p>Category: {{ todo.category }}</p>
+                    <p>Farmer ID: {{todo.fid}}</p>
+                    <!-- <form action="/ahtml" method="POST">
+                      
+                      <button type="submit">Submit Quantity</button>
+                    </form> -->
+                    <!-- Add more details here if needed -->
+                    <h4>Product ID: {{ todo.sno }}</h4>
+                    <form action="/ahtml" method="POST">
+                      <label for="quantity">Quantity:</label>
+                      <input type="quantity" id="quantity" name="quantity"  placeholder="Enter Your Quantity" class="textbox"><br>
+                      <input type="hidden" id="todo_sno" name="todo_sno" value="{{todo.sno}}">
+                      <button class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                    <!-- <input type="submit" value="Add to Cart" onclick="addToCart('ProductName', 'Price', 'Quantity', 'Category')"> -->
+                    <!-- <button class="buy-now-btn">Buy Now</button> -->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        
+    //     function addToCart(todo_sno, productName, price, quantity, category) {
+        
+    //     var formData = new FormData();
+    //     // Add todo_sno and other product details to the form
+    //     formData.append('todo_sno', todo_sno);
+    //     formData.append('product_name', productName);
+    //     formData.append('price', price);
+    //     formData.append('quantity', quantity);
+    //     formData.append('category', category);
+
+    //     // Create an XMLHttpRequest object
+    //     var xhr = new XMLHttpRequest();
+    //     // Configure the request
+    //     xhr.open('POST', '/addcart');
+    //     // Define what happens on successful data submission
+    //     xhr.onload = function() {
+    //         if (xhr.status === 200) {
+    //             // Handle response (if needed)
+    //             console.log(xhr.responseText);
+    //         } else {
+    //             // Handle errors
+    //             console.error('Error:', xhr.statusText);
+    //         }
+    //     };
+    //     // Handle network errors
+    //     xhr.onerror = function() {
+    //         console.error('Request failed');
+    //     };
+    //     // Send the form data
+    //     xhr.send(formData);
+    // }
+        
+
+        // Your JavaScript code here
+        function handleFileUpload(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const imageSrc = e.target.result;
+            const card = event.target.closest('.card');
+            const imageContainer = card.querySelector('.image-container img');
+            imageContainer.src = imageSrc;
+        };
+
+        reader.readAsDataURL(file);
+    }
+    document.getElementById('choose-file').addEventListener('click', function() {
+    document.getElementById('product-image').click();
+});
+
+document.getElementById('product-image').addEventListener('change', handleFileUpload);
+
+function handleFileUpload(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        const imageSrc = e.target.result;
+        const card = event.target.closest('.card');
+        const imageContainer = card.querySelector('.image-container img');
+        imageContainer.src = imageSrc;
+
+        // new
+        localStorage.setItem('uploadedImage', imageSrc);
+    };
+
+    reader.readAsDataURL(file);
+}
+
+        // Filter products function
+        function filterProduct(value) {
+            let buttons = document.querySelectorAll(".button-value");
+            buttons.forEach((button) => {
+                if (value.toUpperCase() == button.innerText.toUpperCase()) {
+                    button.classList.add("active");
+                } else {
+                    button.classList.remove("active");
+                }
+            });
+
+            let elements = document.querySelectorAll(".card");
+            elements.forEach((element) => {
+                if (value == "all") {
+                    element.classList.remove("hide");
+                } else {
+                    if (element.classList.contains(value)) {
+                        element.classList.remove("hide");
+                    } else {
+                        element.classList.add("hide");
+                    }
+                }
+            });
+        }
+
+        // Search products function
+        // document.getElementById("search").addEventListener("click", () => {
+        //     let searchInput = document.getElementById("search-input").value;
+        //     let elements = document.querySelectorAll(".product-name");
+        //     let cards = document.querySelectorAll(".card");
+
+        //     elements.forEach((element, index) => {
+        //         if (element.innerText.includes(searchInput.toUpperCase())) {
+        //             cards[index].classList.remove("hide");
+        //         } else {
+        //             cards[index].classList.add("hide");
+        //         }
+        //     });
+        // });
+
+        // Search products function
+document.getElementById("search").addEventListener("click", () => {
+    let searchInput = document.getElementById("search-input").value.trim().toUpperCase();
+    let elements = document.querySelectorAll(".container h5"); // Updated selector
+    let cards = document.querySelectorAll(".card");
+
+    elements.forEach((element, index) => {
+        if (element.innerText.toUpperCase().includes(searchInput)) {
+            cards[index].classList.remove("hide");
+        } else {
+            cards[index].classList.add("hide");
+        }
+    });
+});
+
+
+        // Initially display all products
+        window.onload = () => {
+            filterProduct("all");
+        };
+
+    </script>
+</body>
+</html>

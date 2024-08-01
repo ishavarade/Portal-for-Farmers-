@@ -1,0 +1,173 @@
+
+<!-- original code -------------------------------- -->
+
+{% extends 'ProductBase.html' %}
+{% block body %}
+<style>
+    /* Add your CSS styles here */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .file-upload input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+    }
+
+    .file-select {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+    
+    <div class="container my-3">
+        <h1>Product Entry Portal</h1>
+        <form action="" method="POST">
+
+            <label for="product_name">Product Name:</label>
+            <input type="text" id="product_name" name="product_name" placeholder="Enter Product Name" required>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" placeholder="Enter Price" required>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Enter Quantity" required>
+
+            <label for="category">Select category:</label>
+            <select id="category" name="category" required>
+                <option value="" disabled selected>Select Category</option>
+                <option value="Vegetable">Vegetable</option>
+                <option value="Spices">Spices</option>
+                <option value="Fruit">Fruit</option>
+                <option value="Dairy">Dairy</option>
+            </select>
+
+            <input type="submit" value="Submit" href="/addfrmr">
+            <a href="/ahtml" class="btn btn-primary">Next</a>
+        </form>
+
+    </div>
+    <div class="container-fluid my-3">
+        <h2>Products</h2>
+
+        <table class="table table-green table-striped-columns">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Farmer ID</th>
+                    <th scope="col">ProductName</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                {% for todo in farmer %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+
+                    <th>{{loop.sno}}</th>
+                    <th>{{todo.fid}}</th>
+                    <td>{{todo.product_name}}</td>
+                    <td>{{todo.price}}</td>
+                    <td>{{todo.quantity}}</td>
+                    <td>{{todo.category}}</td>
+                    <td>{{todo.date_created}}</td>
+                    <td>
+                        <a href="/ProductDelete/{{todo.sno}}" type="button"
+                            class="btn btn-danger btn-sm mx-1">Delete</button>
+                            <a href="/ProductUpdate/{{todo.sno}}" type="button"
+                                class="btn btn-success btn-sm mx-1">Update</button>
+
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    {% endblock body %}
+    
