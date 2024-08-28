@@ -2,7 +2,7 @@
 Portal for farmers to sell their products at better rate
 Technologies Used:
 
-1.	HTML and CSS:
+# 1.	HTML and CSS:
    
 HTML (Hypertext Markup Language) and CSS (Cascading Style Sheets) are fundamental technologies used in web development, playing essential roles in creating visually appealing and interactive user interfaces.
 HTML (Hypertext Markup Language):
@@ -19,7 +19,7 @@ CSS (Cascading Style Sheets):
 ●        CSS selectors and rules ensure consistent styling throughout the website.
 ●        HTML and CSS work in tandem to create visually appealing, accessible, and user-friendly interfaces for web applications. HTML provides the structure and semantics, while CSS adds the aesthetic and stylistic enhancements, resulting in an engaging and immersive user experience. By leveraging the capabilities of HTML and CSS, developers can design interfaces that not only meet functional requirements but also captivate and delight users with their visual appeal and interactivity.
 
-2.	MySQL for database management:
+# 2.	MySQL for database management:
    
 In the Recipe Generator Project, the MySQL database comprises six interconnected tables: cuisine, Recipe, userlogin, bookmark, and ingredient_recipe. Each table serves a specific purpose and is linked to others through relationships to facilitate data management and retrieval. Here's an overview of the tables and their interconnections:
 A)Products Table:
@@ -44,7 +44,8 @@ Foreign Key:
 ●        ‘Fid’ in the ‘Products’, ‘Earning’, and ‘Cart’ tables establishes relationships with the Accounts table, linking each record to the respective farmer.
 
 These tables are interconnected through foreign key constraints, enabling efficient data retrieval and manipulation. The database structure supports the functionalities of the web platform, including product management, user authentication, earnings tracking, and cart management, contributing to a seamless user experience.
-3.	Python flask connectivity:
+
+# 3.	Python flask connectivity:
 In the portal for farmer, Flask is essential to establishing communication between the database, server-side logic, and frontend interface. This is how Flask makes this connectivity possible:
 1.	Routing and URL handling: In Flask, routes are defined using the @app.route() decorator, which associates specific URLs with Python functions. For example, @app.route('/') defines the root URL, and @app.route('/signup') defines the URL for signing up. These routes handle incoming HTTP requests and direct them to the appropriate Python functions for processing. By defining routes, developers can create endpoints for various functionalities like user authentication, product management, and more.
 2.	Template Rendering: Flask integrates with Jinja2, a powerful templating engine, to dynamically generate HTML content. Templates are HTML files that include placeholders for dynamic data. In the Flask application, these templates are rendered with context variables, which are passed from the backend Python code to the HTML template. For example, render_template('index.html', data=data) would render the index.html template with the provided data. This allows developers to create dynamic web pages that display information retrieved from the backend database.
